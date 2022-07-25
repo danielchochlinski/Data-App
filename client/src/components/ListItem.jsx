@@ -4,19 +4,19 @@ import React from "react";
 const ListItem = ({ data }) => {
   // console.log(data);
   return (
-    <div className="flex">
-      <div>{data.id}</div>
-      <div>{data.step}</div>
-      <div>{data.substep}</div>
-      <div>{data.model}</div>
-      <div>{data.heatpump}</div>
-      <div>{data.tank_number}</div>
-      <div>{data.power}</div>
-      <div>{data.version}</div>
-      <div>{data.bypass}</div>
-      <div>{data.status}</div>
-      <div>{data.created_at}</div>
-    </div>
+    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <th className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">{data.id}</th>
+      <td className="py-4 px-6">{data.step}</td>
+      <td className="py-4 px-6">{data.substep}</td>
+      <td className="py-4 px-6">{data.model}</td>
+      <td className="py-4 px-6">{data.heatpump}</td>
+      <td className="py-4 px-6">{data.tank_number}</td>
+      <td className="py-4 px-6">{data.power}</td>
+      <td className="py-4 px-6">{data.version}</td>
+      <td className="py-4 px-6">{data.bypass}</td>
+      <td className="py-4 px-6">{data.status}</td>
+      <td className="py-4 px-6">{data.created_at}</td>
+    </tr>
   );
 };
 
