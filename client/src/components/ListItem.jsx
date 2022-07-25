@@ -1,8 +1,6 @@
 import React from "react";
 
-// const ListItem = ({ id, step, substep, model, heatpump, tank_number, power, version, bypass, status, created_at }) => {
 const ListItem = ({ data }) => {
-  // console.log(data);
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
       <th className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">{data.id}</th>

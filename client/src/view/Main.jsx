@@ -1,17 +1,25 @@
 import React, { useState, useReducer } from "react";
 import { useEffect } from "react";
-import { useAxios } from "../hooks/useAxios";
 import axios from "axios";
-import SearchedData from "../components/SearchedData";
 import List from "../components/List";
 import SearchedDataModal from "../components/SearchedDataModal";
+import { useNotification } from "../context/NotificationProvider";
+
 const URL = "http://localhost:5000/api";
 const dataLocalStorage = JSON.parse(localStorage.getItem("history") || "[]");
 const Main = () => {
+  const dispatch = useNotification();
   const [value, setValue] = useState("");
   const [data, setData] = useState(null);
   const [arr, setArr] = useState(dataLocalStorage);
+  const [helperArr, setHelperArr] = useState(dataLocalStorage);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, isError] = useState(false);
 
+  const uniqueID = () => {
+    const uniq = "id" + new Date().getTime();
+    return uniq;
+  };
   const onSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.get(`${URL}/data/${value}`);
@@ -20,6 +28,7 @@ const Main = () => {
       return response.data.message;
       //notification
     }
+    setHelperArr((state) => [...state, response.data]);
 
     setData(response.data);
 
@@ -42,21 +51,18 @@ const Main = () => {
         <div>
           <div className="justify-items-center mt-10">
             <form onSubmit={onSubmit} className="flex flex-col items-center mb-5 ">
-              {/* <h1>031010103031320322129664</h1>
-            <h2>031010103031320322347815</h2> */}
-
               <input
                 type="number"
                 placeholder="search by id"
                 id="small-input"
-                className="block text-center	 p-2 w-2/3 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="block text-center	 p-2 w-2/3 text-black-900 bg-sky-100 rounded-lg border border-gray-300 sm:text-xs dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:outline-gray-400 hover:bg-sky-200"
                 onChange={(e) => setValue(e.target.value)}
                 value={value}
               />
               <button
                 id="small-button"
                 type="submit"
-                class="w-1/5 h-8 mt-3 inline-block px-4 py-1 border-2 border-grey-600  bg-gray-50 text-gray-400 font-medium text-xs leading-normal uppercase rounded-lg hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                class="w-1/5 h-8 mt-3 inline-block px-4 py-1 border-2 border-grey-800  bg-sky-100 text-gray-500 font-medium text-xs leading-normal uppercase rounded-lg  hover:bg-sky-200 focus:outline-red-500  transition duration-150 ease-in-out"
               >
                 search
               </button>
