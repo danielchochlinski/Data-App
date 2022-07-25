@@ -1,9 +1,9 @@
-import React, { useState, useReducer, useCallback } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import List from "../components/List";
 import SearchedDataModal from "../components/SearchedDataModal";
 import { useNotification } from "../context/NotificationProvider";
+import { uniqueID } from "../utils/functions";
 
 const URL = "http://localhost:5000/api";
 const dataLocalStorage = JSON.parse(localStorage.getItem("history") || "[]");
@@ -12,29 +12,40 @@ const Main = () => {
   const [value, setValue] = useState("");
   const [data, setData] = useState(null);
   const [arr, setArr] = useState(dataLocalStorage);
-  const [helperArr, setHelperArr] = useState(dataLocalStorage);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, isError] = useState(false);
 
-  const uniqueID = () => {
-    const uniq = "id" + new Date().getTime();
-    return uniq;
-  };
+ 
   const onSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.get(`${URL}/data/${value}`);
 
     if (response.data.message) {
+      dispatch({
+        id: uniqueID(),
+        type: "ERROR",
+        title: "Device not found",
+        message: "Please ensure that the id is correct",
+      });
+      setData(null);
       return response.data.message;
-      // notification
     }
-
-    setData(response.data);
-
     const isInArray = arr.find((element) => element.id === response.data.id);
+    if (isInArray)
+      dispatch({
+        id: uniqueID(),
+        type: "SUCCESS",
+        message: "",
+        title: "Data found",
+      });
+    setData(response.data);
 
     if (!isInArray) {
       setArr((state) => [...state, response.data]);
+      dispatch({
+        id: uniqueID(),
+        type: "SUCCESS",
+        message: "Data added to your list",
+        title: "Data found",
+      });
     }
 
     // no duplicates in array after search result
@@ -56,10 +67,10 @@ const Main = () => {
     <>
       <section>
         <div>
-          <div className="justify-items-center mt-10">
+          <div className="justify-items-center mt-10 ">
             <form onSubmit={onSubmit} className="flex flex-col items-center mb-5 ">
               <input
-                type="number"
+                type="text"
                 placeholder="search by id"
                 id="small-input"
                 className="block text-center	 p-2 w-2/3 text-black-900 bg-sky-100 rounded-lg border border-gray-300 sm:text-xs dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:outline-gray-400 hover:bg-sky-200"

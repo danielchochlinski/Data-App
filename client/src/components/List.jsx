@@ -46,7 +46,7 @@ const List = ({ arr }) => {
 
   return (
     <div className="flex flex-col ">
-      <div className="flex gap-20 justify-left ml-12 	">
+      <div className="grid gap-5 ml-10 mr-10	mobile:flex">
         <div
           onClick={setAllHandle}
           className=" cursor-pointer bg-gray-100 text-black cursor-ponter active:bg-black-600 font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 flex flex-col justify-center	pb-0"
@@ -81,7 +81,7 @@ const List = ({ arr }) => {
           >
             <option value={"none"}>none</option>
             {uniqueModel.map((el) => (
-              <option key={el?.value} value={el}>
+              <option key={el.value} value={el}>
                 {el}
               </option>
             ))}

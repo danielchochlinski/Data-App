@@ -25,9 +25,9 @@ export default function Modal({ data }) {
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid text-center border-slate-200 rounded-t">
-                  <h3 className="text-3xl font-semibold">ID: {data?.id}</h3>
+                  <h3 className="mobile:text-l text-s font-semibold">ID: {data?.id}</h3>
                 </div>
-                <div className="relative p-6  text-m text-slate-500 leading-relaxed  grid grid-cols-4 gap-4">
+                <div className="relative p-6 mobile:text-m text-s text-slate-500 leading-relaxed  grid grid-cols-4 gap-4">
                   <label>Step:</label>
                   <span className="text-center">{data?.step}</span>
 

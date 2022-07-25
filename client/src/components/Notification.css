@@ -1,5 +1,5 @@
 .notification_item {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
   background-color: #ffffff;
 
   border-radius: 10px;
@@ -8,6 +8,13 @@
   animation: SlideLeft 0.4s;
   animation-fill-mode: forwards;
   width: 300px;
+}
+.notification_item.success {
+  box-shadow: 0 0 10px rgba(122, 224, 221, 0.4);
+}
+
+.notification_item.error {
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
 }
 
 @keyframes SlideLeft {
@@ -45,7 +52,7 @@
 }
 
 .notification_item.success .bar {
-  background-color: rgba(101, 210, 102, 0.4);
+  background-color: rgba(122, 224, 221, 0.4);
 }
 
 .notification_item.error .bar {
