@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useCallback } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import List from "../components/List";
@@ -26,13 +26,18 @@ const Main = () => {
 
     if (response.data.message) {
       return response.data.message;
-      //notification
+      // notification
     }
-    setHelperArr((state) => [...state, response.data]);
 
     setData(response.data);
 
-    setArr((state) => [...state, response.data]);
+    const isInArray = arr.find((element) => element.id === response.data.id);
+
+    if (!isInArray) {
+      setArr((state) => [...state, response.data]);
+    }
+
+    // no duplicates in array after search result
   };
 
   useEffect(() => {
@@ -40,8 +45,10 @@ const Main = () => {
       if (!unique.some((obj) => obj.id === o.id)) {
         unique.push(o);
       }
+
       return unique;
     }, []);
+
     localStorage.setItem("history", JSON.stringify(unique));
   }, [arr, data]);
 

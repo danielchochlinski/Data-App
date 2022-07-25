@@ -14,78 +14,35 @@ const List = ({ arr }) => {
     "STATUS",
     "CREATED_AT",
   ];
-
-  const [all, setAll] = useState("all");
+  //set arrays no duplicate
   const uniqueHeatPump = [...new Set(arr.map((item) => item.heatpump))];
   const uniqueModel = [...new Set(arr.map((item) => item.model))];
+
   const [pump, setPump] = useState("none");
   const [model, setModel] = useState("none");
+
+  //filtered is responsible for filtered and displaying data
   const [filtered, setFiltered] = useState();
 
-  console.log("arr", arr);
-  console.log("filtered", filtered);
   const setAllHandle = () => {
     setPump("none");
     setModel("none");
   };
-  const setAllF = useCallback(() => {
+  const filterAll = useCallback(() => {
     if (pump === "none" && model === "none") {
       setFiltered(arr);
     }
   }, [arr, model, pump]);
   useEffect(() => {
-    setAllF();
-  }, [all, arr, model, pump, setAllF]);
-
-  //filter for duplicates
-  const filterFunction = useCallback(() => {
-    const arrayList = JSON.parse(localStorage.getItem("history"));
-    // arr.reduce((unique, o) => {
-    //   if (!unique.some((obj) => obj?.id === o?.id)) {
-    //     unique.push(o);
-    //   }
-      setFiltered(arrayList);
-    //   return unique;
-    // }, []);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [arr]);
+    filterAll();
+  }, [arr, model, pump, filterAll]);
 
   useEffect(() => {
-    filterFunction();
-  }, [filterFunction, arr]);
-
-  //fulter by heatpump
-  const filterByPump = useCallback(() => {
-    if (pump !== "none") {
-      const filtered = arr.filter((el) => el.heatpump === pump);
-      setModel("none");
-      setFiltered(filtered);
-    }
-    if (pump === "none") {
-      setFiltered(arr);
-    }
-  }, [arr, pump]);
-
-  useEffect(() => {
-    filterByPump();
-  }, [filterByPump]);
-
-  //filter by model
-  const filterByModel = useCallback(() => {
-    if (model !== "none") {
-      const filtered = arr.filter((el) => el.model === model);
-      setPump("none");
-      setFiltered(filtered);
-    }
-    if (model === "none") {
-      setFiltered(arr);
-    }
-  }, [arr, model]);
-
-  useEffect(() => {
-    filterByModel();
-  }, [filterByModel]);
+    const result = arr.filter(
+      (item) => (item.heatpump === pump || pump === "none") && (item.model === model || model === "none")
+    );
+    setFiltered(result);
+  }, [arr, model, pump]);
 
   return (
     <div className="flex flex-col ">
