@@ -12,11 +12,10 @@ const Main = () => {
   const [value, setValue] = useState("");
   const [data, setData] = useState(null);
   const [arr, setArr] = useState(dataLocalStorage);
-
   const onSubmit = async (e) => {
     e.preventDefault();
     const response = await axios.get(`${URL_PROD}/${value}`);
-    if (!response || data === "") {
+    if (value === "") {
       dispatch({
         id: uniqueID(),
         type: "ERROR",
@@ -25,6 +24,7 @@ const Main = () => {
       });
       return;
     }
+
     if (response.data.message) {
       dispatch({
         id: uniqueID(),
