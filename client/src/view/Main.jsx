@@ -23,6 +23,7 @@ const Main = () => {
         title: "No Id entered",
         message: "Please enter an id!",
       });
+      return;
     }
     if (response.data.message) {
       dispatch({
