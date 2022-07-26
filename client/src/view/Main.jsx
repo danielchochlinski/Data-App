@@ -4,7 +4,7 @@ import List from "../components/List";
 import SearchedDataModal from "../components/SearchedDataModal";
 import { useNotification } from "../context/NotificationProvider";
 import { uniqueID } from "../utils/functions";
-const URL_PROD = "https://device-data-app.herokuapp.com/api/data"
+const URL_PROD = "https://device-data-app.herokuapp.com/api/data";
 const URL = "http://localhost:5000/api/data";
 const dataLocalStorage = JSON.parse(localStorage.getItem("history") || "[]");
 const Main = () => {
@@ -15,8 +15,15 @@ const Main = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.get(`${URL_PROD}/${value}`);
-
+    const response = await axios.get(`${URL}/${value}`);
+    if (!response || data === "") {
+      dispatch({
+        id: uniqueID(),
+        type: "ERROR",
+        title: "No Id entered",
+        message: "Please enter an id!",
+      });
+    }
     if (response.data.message) {
       dispatch({
         id: uniqueID(),
