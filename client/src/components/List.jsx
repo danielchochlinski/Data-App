@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import ListItem from "./ListItem";
-const List = ({ arr }) => {
+import { dummyID } from "../utils/functions";
+const List = ({ arr, setValue }) => {
   const headers = [
     "ID",
     "STEP",
@@ -46,7 +47,7 @@ const List = ({ arr }) => {
 
   return (
     <div className="flex flex-col ">
-      <div className="grid gap-5 ml-10 mr-10	mobile:flex">
+      <div className="grid gap-5 ml-10 mr-10	tablet:flex">
         <div
           onClick={setAllHandle}
           className=" cursor-pointer bg-gray-100 text-black cursor-ponter active:bg-black-600 font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 flex flex-col justify-center	pb-0"
@@ -63,13 +64,14 @@ const List = ({ arr }) => {
             id="pump"
           >
             <option value="none">none</option>
-            {uniqueHeatPump.map((el) => (
-              <option key={el?.value} value={el}>
+            {uniqueHeatPump.map((el, i) => (
+              <option key={`pump${i}`} value={el}>
                 {el}
               </option>
             ))}
           </select>
         </div>
+
         <div className="bg-gray-100 text-black cursor-ponter active:bg-black-600 font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 flex flex-col">
           <label className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">by Model</label>
           <select
@@ -80,10 +82,18 @@ const List = ({ arr }) => {
             id="model"
           >
             <option value={"none"}>none</option>
-            {uniqueModel.map((el) => (
-              <option key={el.value} value={el}>
+            {uniqueModel.map((el, i) => (
+              <option key={`model${i}`} value={el}>
                 {el}
               </option>
+            ))}
+          </select>
+        </div>
+        <div className="bg-gray-100 text-black cursor-ponter active:bg-black-600 font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 flex flex-col">
+          <label className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">Test ID</label>
+          <select className="cursor-pointer" name="dummy" id="dummy" onChange={(e) => setValue(e.target.value)}>
+            {dummyID.map((el) => (
+              <option key={el.id}>{el}</option>
             ))}
           </select>
         </div>

@@ -5,7 +5,7 @@ import SearchedDataModal from "../components/SearchedDataModal";
 import { useNotification } from "../context/NotificationProvider";
 import { uniqueID } from "../utils/functions";
 
-const URL = "http://localhost:5000/api";
+const URL = "http://localhost:5000/api/data";
 const dataLocalStorage = JSON.parse(localStorage.getItem("history") || "[]");
 const Main = () => {
   const dispatch = useNotification();
@@ -13,10 +13,9 @@ const Main = () => {
   const [data, setData] = useState(null);
   const [arr, setArr] = useState(dataLocalStorage);
 
- 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.get(`${URL}/data/${value}`);
+    const response = await axios.get(`${URL}/${value}`);
 
     if (response.data.message) {
       dispatch({
@@ -47,8 +46,6 @@ const Main = () => {
         title: "Data found",
       });
     }
-
-    // no duplicates in array after search result
   };
 
   useEffect(() => {
@@ -89,7 +86,7 @@ const Main = () => {
               </div>
             </form>
           </div>
-          <List arr={arr} />
+          <List arr={arr} setValue={setValue} />
         </div>
       </section>
     </>
