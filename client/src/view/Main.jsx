@@ -15,7 +15,7 @@ const Main = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.get(`${URL}/${value}`);
+    const response = await axios.get(`${URL_PROD}/${value}`);
     if (!response || data === "") {
       dispatch({
         id: uniqueID(),
