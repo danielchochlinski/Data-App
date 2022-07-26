@@ -65,12 +65,15 @@ const Main = () => {
       <section>
         <div>
           <div className="justify-items-center mt-10 ">
-            <form onSubmit={onSubmit} className="flex flex-col items-center mb-5 ">
+            <form
+              onSubmit={onSubmit}
+              className="flex flex-col items-center mb-5 "
+            >
               <input
                 type="text"
                 placeholder="search by id"
                 id="small-input"
-                className="block text-center	 p-2 w-2/3 text-black-900 bg-sky-100 rounded-lg border border-gray-300 sm:text-xs dark:border-gray-600 dark:placeholder-gray-400 dark:text-white focus:outline-gray-400 hover:bg-sky-200"
+                className="block text-center	 p-2 w-2/3 text-black-900 bg-sky-100 rounded-lg border border-gray-300 sm:text-xs  focus:outline-gray-400 hover:bg-sky-200"
                 onChange={(e) => setValue(e.target.value)}
                 value={value}
               />

@@ -40,7 +40,9 @@ const List = ({ arr, setValue }) => {
 
   useEffect(() => {
     const result = arr.filter(
-      (item) => (item.heatpump === pump || pump === "none") && (item.model === model || model === "none")
+      (item) =>
+        (item.heatpump === pump || pump === "none") &&
+        (item.model === model || model === "none")
     );
     setFiltered(result);
   }, [arr, model, pump]);
@@ -52,10 +54,14 @@ const List = ({ arr, setValue }) => {
           onClick={setAllHandle}
           className=" cursor-pointer bg-gray-100 text-black cursor-ponter active:bg-black-600 font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 flex flex-col justify-center	pb-0"
         >
-          <label className="mb-2  cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-400">all</label>
+          <label className="mb-2  cursor-pointer text-sm font-medium text-gray-700 dark:text-gray-400">
+            all
+          </label>
         </div>
         <div className="bg-gray-100 text-black cursor-ponter active:bg-black-600 font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 flex flex-col">
-          <label className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">by HeatPump</label>
+          <label className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">
+            by HeatPump
+          </label>
           <select
             className="cursor-pointer"
             onChange={(e) => setPump(e.target.value)}
@@ -73,7 +79,9 @@ const List = ({ arr, setValue }) => {
         </div>
 
         <div className="bg-gray-100 text-black cursor-ponter active:bg-black-600 font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 flex flex-col">
-          <label className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">by Model</label>
+          <label className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">
+            by Model
+          </label>
           <select
             className="cursor-pointer"
             value={model}
@@ -90,8 +98,15 @@ const List = ({ arr, setValue }) => {
           </select>
         </div>
         <div className="bg-gray-100 text-black cursor-ponter active:bg-black-600 font-semibold uppercase text-sm px-6 py-3 rounded-lg shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150 flex flex-col">
-          <label className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">Test ID</label>
-          <select className="cursor-pointer" name="dummy" id="dummy" onChange={(e) => setValue(e.target.value)}>
+          <label className="mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">
+            Test ID
+          </label>
+          <select
+            className="cursor-pointer"
+            name="dummy"
+            id="dummy"
+            onChange={(e) => setValue(e.target.value)}
+          >
             {dummyID.map((el) => (
               <option key={el.id}>{el}</option>
             ))}
@@ -100,7 +115,7 @@ const List = ({ arr, setValue }) => {
       </div>
       <div className=" overflow-x-auto relative shadow-md sm:rounded-lg m-10 justify-center">
         <table className=" w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-900 uppercase bg-sky-100 dark:bg-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-900 uppercase bg-sky-100  dark:text-gray-500">
             <tr>
               {headers.map((el) => (
                 <td className="py-3 px-6" key={el}>

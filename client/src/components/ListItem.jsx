@@ -2,8 +2,10 @@ import React from "react";
 
 const ListItem = ({ data }) => {
   return (
-    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-      <th className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">{data.id}</th>
+    <tr className="bg-white border-b">
+      <th className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">
+        {data.id}
+      </th>
       <td className="py-4 px-6">{data.step}</td>
       <td className="py-4 px-6">{data.substep}</td>
       <td className="py-4 px-6">{data.model}</td>
