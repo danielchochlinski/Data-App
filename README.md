@@ -9,3 +9,6 @@ to run the app do the following: <br />
 -npm i (from the clinet folder to install client modules) <br />
 <br />
 npm run dev from root folder to run the development server.
+
+App is up on heroku.
+https://device-data-app.herokuapp.com/
