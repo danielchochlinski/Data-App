@@ -4,8 +4,8 @@ import List from "../components/List";
 import SearchedDataModal from "../components/SearchedDataModal";
 import { useNotification } from "../context/NotificationProvider";
 import { uniqueID } from "../utils/functions";
-const URL_PROD = "https://device-app-api.onrender.com/";
-const URL = "http://localhost:5000/api/data";
+const URL_PROD = "https://device-app-api.onrender.com";
+const URL = "http://localhost:9000/api/data";
 const dataLocalStorage = JSON.parse(localStorage.getItem("history") || "[]");
 const Main = () => {
   const dispatch = useNotification();
